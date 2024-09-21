@@ -77,8 +77,8 @@ namespace Web_API_PBL.Migrations
                         name: "FK_ProductPrices_Products_product_id",
                         column: x => x.product_id,
                         principalTable: "Products",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Cascade,
+                        principalColumn: "id");
                     table.ForeignKey(
                         name: "FK_ProductPrices_Websites_website_id",
                         column: x => x.website_id,
