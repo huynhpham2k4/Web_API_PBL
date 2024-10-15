@@ -41,6 +41,60 @@ namespace Web_API_PBL.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("Web_API_PBL.Models.CrawlData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int")
+                        .HasColumnName("Category_id");
+
+                    b.Property<string>("ImageSelector")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("image_selector");
+
+                    b.Property<string>("LinkSelector")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("link_selector");
+
+                    b.Property<string>("NameSelector")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("name_selector");
+
+                    b.Property<string>("PriceSelector")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("price_selector");
+
+                    b.Property<string>("SiteName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("site_name");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("url");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CrawlData");
+                });
+
             modelBuilder.Entity("Web_API_PBL.Models.Product", b =>
                 {
                     b.Property<int>("Id")

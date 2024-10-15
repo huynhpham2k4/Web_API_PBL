@@ -5,7 +5,7 @@
 namespace Web_API_PBL.Migrations
 {
     /// <inheritdoc />
-    public partial class Migrations : Migration
+    public partial class first : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,6 +21,25 @@ namespace Web_API_PBL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CrawlData",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    site_name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Category_id = table.Column<int>(type: "int", nullable: false),
+                    name_selector = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    price_selector = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    link_selector = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    image_selector = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    url = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CrawlData", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -77,8 +96,8 @@ namespace Web_API_PBL.Migrations
                         name: "FK_ProductPrices_Products_product_id",
                         column: x => x.product_id,
                         principalTable: "Products",
-                        onDelete: ReferentialAction.Cascade,
-                        principalColumn: "id");
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ProductPrices_Websites_website_id",
                         column: x => x.website_id,
@@ -106,6 +125,9 @@ namespace Web_API_PBL.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CrawlData");
+
             migrationBuilder.DropTable(
                 name: "ProductPrices");
 
