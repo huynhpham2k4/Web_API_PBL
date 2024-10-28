@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Web_API_PBL.Models;
 
@@ -14,6 +15,7 @@ namespace Web_API_PBL.Controllers
 	public class ProductController : ControllerBase
 	{
 		private readonly DataContext _context;
+		private static int PAGE_SIZE { get; set; } = 24;
 
 		public ProductController(DataContext context)
 		{
@@ -31,12 +33,44 @@ namespace Web_API_PBL.Controllers
 			return await _context.Products.ToListAsync();
 		}
 
-		// GET: api/Product/5
+		[HttpGet("category")]
+		public async Task<IEnumerable<Product>> GetProductByCategoryId(int categoryId = 0, string? search = null, int pageNumber = 1)
+		{
+			if (_context.ProductPrices == null)
+			{
+				return Enumerable.Empty<Product>();
+			}
+
+			IQueryable<Product> query = _context.Products;
+
+			//filter theo categoryId
+			if (categoryId > 0)
+			{
+				query = query.Where(p => p.CategoryId == categoryId);
+			}
+
+			//filter theo search
+			if (!string.IsNullOrEmpty(search))
+			{
+				query = query.Where(p => p.Name.Contains(search));
+			}
+
+			// Thực hiện phân trang
+			var products = await query
+				.Skip((pageNumber - 1) * PAGE_SIZE)
+				.Take(PAGE_SIZE)
+				.ToListAsync();
+
+			// Trả về kết quả, kiểm tra null không cần thiết vì ToListAsync sẽ trả về danh sách rỗng nếu không có kết quả
+			return products;
+		}
+
+
+
+		// GET: api/product/5
 		[HttpGet("{id}")]
 		public async Task<ActionResult<Product>> GetProduct(int id)
 		{
-			string s = "";
-
 			if (_context.Products == null)
 			{
 				return NotFound();
