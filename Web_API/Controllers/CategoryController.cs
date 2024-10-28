@@ -11,55 +11,55 @@ namespace Web_API_PBL.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CrawlDataController : ControllerBase
+    public class CategoryController : ControllerBase
     {
         private readonly DataContext _context;
 
-        public CrawlDataController(DataContext context)
+        public CategoryController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: api/CrawlData
+        // GET: api/Category
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CrawlData>>> GetCrawlDatas()
+        public async Task<ActionResult<IEnumerable<Category>>> GetCategorys()
         {
-          if (_context.CrawlDatas == null)
+          if (_context.Categorys == null)
           {
               return NotFound();
           }
-            return await _context.CrawlDatas.ToListAsync();
+            return await _context.Categorys.ToListAsync();
         }
 
-        // GET: api/CrawlData/5
+        // GET: api/Category/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<CrawlData>> GetCrawlData(int id)
+        public async Task<ActionResult<Category>> GetCategory(int id)
         {
-          if (_context.CrawlDatas == null)
+          if (_context.Categorys == null)
           {
               return NotFound();
           }
-            var crawlData = await _context.CrawlDatas.FindAsync(id);
+            var category = await _context.Categorys.FindAsync(id);
 
-            if (crawlData == null)
+            if (category == null)
             {
                 return NotFound();
             }
 
-            return crawlData;
+            return category;
         }
 
-        // PUT: api/CrawlData/5
+        // PUT: api/Category/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCrawlData(int id, CrawlData crawlData)
+        public async Task<IActionResult> PutCategory(int id, Category category)
         {
-            if (id != crawlData.Id)
+            if (id != category.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(crawlData).State = EntityState.Modified;
+            _context.Entry(category).State = EntityState.Modified;
 
             try
             {
@@ -67,7 +67,7 @@ namespace Web_API_PBL.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CrawlDataExists(id))
+                if (!CategoryExists(id))
                 {
                     return NotFound();
                 }
@@ -80,44 +80,44 @@ namespace Web_API_PBL.Controllers
             return NoContent();
         }
 
-        // POST: api/CrawlData
+        // POST: api/Category
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<CrawlData>> PostCrawlData(CrawlData crawlData)
+        public async Task<ActionResult<Category>> PostCategory(Category category)
         {
-          if (_context.CrawlDatas == null)
+          if (_context.Categorys == null)
           {
-              return Problem("Entity sett 'DataContext.CrawlDatas'  is null.");
+              return Problem("Entity set 'DataContext.Categorys'  is null.");
           }
-            _context.CrawlDatas.Add(crawlData);
+            _context.Categorys.Add(category);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCrawlData", new { id = crawlData.Id }, crawlData);
+            return CreatedAtAction("GetCategory", new { id = category.Id }, category);
         }
 
-        // DELETE: api/C  rawlData/5
+        // DELETE: api/Category/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCrawlData(int id)
+        public async Task<IActionResult> DeleteCategory(int id)
         {
-            if (_context.CrawlDatas == null)
+            if (_context.Categorys == null)
             {
                 return NotFound();
             }
-            var crawlData = await _context.CrawlDatas.FindAsync(id);
-            if (crawlData == null)
+            var category = await _context.Categorys.FindAsync(id);
+            if (category == null)
             {
                 return NotFound();
             }
 
-            _context.CrawlDatas.Remove(crawlData);
+            _context.Categorys.Remove(category);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool CrawlDataExists(int id)
+        private bool CategoryExists(int id)
         {
-            return (_context.CrawlDatas?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Categorys?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

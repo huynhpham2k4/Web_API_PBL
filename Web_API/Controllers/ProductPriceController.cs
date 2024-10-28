@@ -41,7 +41,7 @@ namespace Web_API_PBL.Controllers
 			}
 
 			var productPrices = await _context.ProductPrices
-			.Where(pp => pp.ProductId == productId)
+			.Where(pp => pp.ProductId == productId).Include("Website")
 			.ToListAsync();
 
 
