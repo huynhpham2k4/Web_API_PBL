@@ -87,7 +87,7 @@ namespace Web_API_PBL.Controllers
         {
           if (_context.CrawlDatas == null)
           {
-              return Problem("Entity set 'DataContext.CrawlDatas'  is null.");
+              return Problem("Entity sett 'DataContext.CrawlDatas'  is null.");
           }
             _context.CrawlDatas.Add(crawlData);
             await _context.SaveChangesAsync();
