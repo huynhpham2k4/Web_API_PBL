@@ -20,7 +20,7 @@ namespace Web_API_PBL.Controllers
             _context = context;
         }
 
-        // GET: api/Category huynh test
+        // GET: api/Category huynh
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Category>>> GetCategorys()
         {
