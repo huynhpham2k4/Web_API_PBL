@@ -22,7 +22,7 @@ namespace Web_API_PBL.Controllers
 
         // GET: api/Category huy
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Catery>>> GetCategorys()
+        public async Task<ActionResult<IEnumerable<Category>>> GetCategorys()
         {
           if (_context.Categorys == null)
           {
