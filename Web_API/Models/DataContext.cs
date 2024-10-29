@@ -11,10 +11,6 @@ namespace Web_API_PBL.Models
 		public DbSet<ProductPrice> ProductPrices { get; set; }
 		public DbSet<Website> Websites { get; set; }
 		public DbSet<Product> Products { get; set; }
-<<<<<<< HEAD
-=======
-
 		public DbSet<CrawlData> CrawlDatas { get; set; }
->>>>>>> huynh-brand
 	}
 }
